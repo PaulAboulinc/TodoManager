@@ -16,7 +16,6 @@
 <script>
 import Skill from '@/components/skill'
 import axios from 'axios'
-
 export default {
   name: 'mySkills',
   components: {

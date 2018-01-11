@@ -20,11 +20,30 @@ app.post('/add', urlEncodedParser, function (req, res) {
     req.session.todoList = [];
   }
   if (req.session.todoList.indexOf(req.body.todo) == -1) {
-  	req.session.todoList.push(req.body.todo);
-  	res.send(req.session.todoList);
-	} else {
-		res.send("existe déjà");
-	}
+    req.session.todoList.push(req.body.todo);
+    res.send(req.session.todoList);
+  } else {
+    res.send("existe déjà");
+  }
+});
+
+app.get('/add/:todo', function (req, res) {
+  if (!req.session.todoList) {
+    req.session.todoList = [];
+  }
+  if (req.session.todoList.indexOf(req.params.todo) == -1) {
+    req.session.todoList.push(req.params.todo);
+    res.send(req.session.todoList);
+  } else {
+    res.send("existe déjà");
+  }
+});
+
+app.use(function(req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Origin");
+  next();
 });
 
 app.post('/delete', urlEncodedParser, function (req, res) {
