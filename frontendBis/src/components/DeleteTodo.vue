@@ -1,14 +1,35 @@
 <template>
-  <tr>
-    <td> {{ key }}</td>
-  </tr>
+  <div class="row">
+    <a href="http://localhost:8080/"><button type="button" @click="deleteTodo(todoKey)">X</button></a>
+  </div>
 </template>
 
 <script>
+import axios from 'axios'
+
+var config = {
+  headers: {
+    'content-type': 'application/x-www-form-urlencoded'
+  }
+}
+var params = new URLSearchParams()
 export default {
   name: 'DeleteTodo',
   props: [
-    'key'
-  ]
+    'todoKey'
+  ],
+  methods: {
+    deleteTodo (todoKey) {
+      params.append('key', todoKey)
+      console.log('lol : ' + todoKey)
+      axios.post('http://localhost:3000/delete', params,
+        config,
+        { withCredentials: true }
+      )
+      .then((response) => {
+        this.todos = response.data
+      })
+    }
+  }
 }
 </script>

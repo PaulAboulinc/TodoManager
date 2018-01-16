@@ -23,11 +23,16 @@ app.use(function(req, res, next) {
 
 app.post('/add', urlEncodedParser, function (req, res, next) {
   if (!req.session.todoList) {
-    req.session.todoList = [];
+    req.session.todoList = {};
+    req.session.index = 0;
   }
-  req.session.todoList.push(req.body.todo);
-  console.log('body : '+ req.body.todo);
-  console.log('todolistAdd : '+ req.session.todoList);
+  if (Array.isArray(req.body.nom)) { 
+    req.session.todoList["i"+req.session.index] = {'nom':req.body.nom[req.body.nom.length-1], 'description':req.body.description[req.body.description.length-1]};
+  } else {
+    req.session.todoList["i"+req.session.index] = {'nom':req.body.nom, 'description':req.body.description};
+    console.log('todolistAdd : '+ req.session.todoList);
+  }
+    req.session.index++;
   res.send(req.session.todoList);
   
 });
@@ -41,21 +46,28 @@ app.post('/add', urlEncodedParser, function (req, res, next) {
 
 });*/
 
-app.get('/delete/:id', urlEncodedParser, function (req, res, next) {
-  console.log("key : "+req.params.id);
-  req.session.todoList.splice(req.params.id, 1);
-  res.send(req.session.todoList);
-});
-
 app.post('/delete', urlEncodedParser, function (req, res, next) {
-  console.log("todolist : "+req.session.todoList);
-	req.session.todoList.splice(req.body.key, 1);
+  console.log("todolist : "+req.body.key);
+  if (Array.isArray(req.body.key)) {
+    delete req.session.todoList[req.body.key[req.body.key.length-1]];
+  } else {
+    delete req.session.todoList[req.body.key];
+  }
 	res.send(req.session.todoList);
 });
 
-app.get('/getAll', function (req, res, next) {
+/*app.get('/getAll', function (req, res, next) {
   console.log("getAllList : "+req.session.todoList);
   res.send(req.session.todoList);
+});*/
+
+app.post('/getAll', urlEncodedParser, function (req, res, next) {
+  console.log("getAllList : "+req.session.todoList);
+  res.send(req.session.todoList);
+});
+
+app.post('/get', urlEncodedParser, function (req, res, next) {
+  res.send(req.session.todoList[req.body.key]);
 });
 
 app.get('/getPage/:page/:size', function (req, res, next) {

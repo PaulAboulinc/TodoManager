@@ -1,19 +1,13 @@
 <template>
   <div id="app">
-    <TodoList></TodoList>
-    <!-- <router-view></router-view> -->
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import TodoList from '@/components/TodoList'
 
 export default {
-  name: 'app',
-  // Ajouter nos 4 composants
-  components: {
-    TodoList
-  }
+  name: 'app'
 }
 </script>
 
