@@ -4,6 +4,7 @@
     <router-link :to="{ path: 'add' }" >Ajouter</router-link>
     <li v-for="(todo,key) of todos">
       <router-link :to="{ path: 'view', query: { todoKey: key }}" ><p><strong>{{key}} {{todo.nom}}</strong></p></router-link>
+      <router-link :to="{ path: 'add', query: { todoKey: key, todo: todo }}" ><p><strong>Modifier</strong></p></router-link>
       <DeleteTodo :todoKey="key"></DeleteTodo>
     </li>
   </ul>

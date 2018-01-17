@@ -32,7 +32,29 @@ app.post('/add', urlEncodedParser, function (req, res, next) {
     req.session.todoList["i"+req.session.index] = {'nom':req.body.nom, 'description':req.body.description};
     console.log('todolistAdd : '+ req.session.todoList);
   }
-    req.session.index++;
+  req.session.index++;
+  res.send(req.session.todoList);
+  
+});
+
+app.post('/edit', urlEncodedParser, function (req, res, next) {
+  if (!req.session.todoList) {
+    req.session.todoList = {};
+    req.session.index = 0;
+  }
+  if (Array.isArray(req.body.todoKey)) { 
+    if (Array.isArray(req.body.nom)) {
+      req.session.todoList[req.body.todoKey[req.body.todoKey.length-1]] = {'nom':req.body.nom[req.body.nom.length-1], 'description':req.body.description[req.body.description.length-1]};
+    } else {
+      req.session.todoList[req.body.todoKey[req.body.todoKey.length-1]] = {'nom':req.body.nom, 'description':req.body.description};
+    }
+  } else {
+    if (Array.isArray(req.body.nom)) {
+      req.session.todoList[req.body.todoKey] = {'nom':req.body.nom[req.body.nom.length-1], 'description':req.body.description[req.body.description.length-1]};
+    } else {
+      req.session.todoList[req.body.todoKey] = {'nom':req.body.nom, 'description':req.body.description};
+    }
+  }
   res.send(req.session.todoList);
   
 });
