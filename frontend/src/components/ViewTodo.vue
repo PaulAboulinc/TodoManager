@@ -1,7 +1,6 @@
 <template>
   <div class="row">
     <h3> Détails Todo : {{ todos.nom }} </h3>
-    <router-link :to="{ path: '/' }" ><h4> Retour Liste des Todos </h4></router-link>
     <br/>
     <p> Nom : {{ todos.nom }} </p>
     <br/>
