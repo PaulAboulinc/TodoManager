@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <a href="http://localhost:8080/"><button type="button" @click="deleteTodo(todoKey)">X</button></a>
+    <a href="http://localhost:8080/"><button type="button"  class="btn btn-danger" @click="deleteTodo(todoKey)">Supprimer Todo</button></a>
   </div>
 </template>
 

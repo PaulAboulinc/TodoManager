@@ -1,10 +1,11 @@
 <template>
   <div class="row">
-    <a href="http://localhost:8080/" >Liste</a>
+    <h3> Détails Todo : {{ todos.nom }} </h3>
+    <router-link :to="{ path: '/' }" ><h4> Retour Liste des Todos </h4></router-link>
     <br/>
-    Nom : {{ todos.nom }}
+    <p> Nom : {{ todos.nom }} </p>
     <br/>
-    Description : {{ todos.description }}        
+    <p>Description : {{ todos.description }}        </p>
   </div>
 </template>
 

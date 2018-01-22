@@ -1,21 +1,23 @@
 <template>
   <div class="row" v-if="todoKey">
-    <router-link :to="{ path: '/' }" >Liste</router-link>
+    <h3> Modifier une Todo </h3>
+    <router-link :to="{ path: '/' }" ><h4> Retour Liste des Todos </h4></router-link>
     <br/>
     <!-- Ici je relie mes input aux données de mon composant avec un v-model -->
-    <label for="nom">Nom</label>
+    <label for="nom">Nom : </label>
     <input type="text" id="nom" v-model="nom"/>
-    <label for="description">Description</label>
+    <label for="description">Description : </label>
     <input type="text" id="description" v-model="description"/>
     <button type="button" @click="editTodo">Soumettre</button>
   </div>
   <div class="row" v-else>
-    <router-link :to="{ path: '/' }" >Liste</router-link>
+    <h3> Ajouter une Todo </h3>
+    <router-link :to="{ path: '/' }" ><h4> Retour Liste des Todos </h4></router-link>
     <br/>
     <!-- Ici je relie mes input aux données de mon composant avec un v-model -->
-    <label for="nom">Nom</label>
-    <input type="text" id="nom" v-model="nom"/> 
-    <label for="description">Description</label>
+    <label for="nom">Nom : </label>
+    <input type="text" id="nom" v-model="nom"/>
+    <label for="description">Description : </label>
     <input type="text" id="description" v-model="description"/>
     <button type="button" @click="addTodo">Soumettre</button>
   </div>
